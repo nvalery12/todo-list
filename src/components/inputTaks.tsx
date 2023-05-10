@@ -1,18 +1,16 @@
 import { useState } from 'react';
-import { useAppDispatch } from '../hooks/redux';
-import { addTodo } from '../store/slice/todoSlice';
+import { useTodo } from '../hooks/useTodo';
 
 export default function InputTask() {
-  const dispatch = useAppDispatch();
+  const {addTodo} = useTodo();
   const [description, setDescription] = useState('');
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function handleSubmit(e: any) {
+  function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
     if (description.trim() === '') {
       return;
     }
-    dispatch(addTodo(description));
+    addTodo(description);
     setDescription('');
   }
 

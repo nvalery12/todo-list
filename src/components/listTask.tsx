@@ -1,18 +1,15 @@
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { useTodo } from '../hooks/useTodo';
 import type { Todo } from '../store/slice/todoSlice';
-// eslint-disable-next-line no-duplicate-imports
-import { deleteTodo, toggleTodo } from '../store/slice/todoSlice';
 
 export default function ListTask() {
-  const list = useAppSelector((state) => state.list.todos);
-  const dispatch = useAppDispatch();
+  const { list, toggleTodo, deleteTodo } = useTodo();
 
   function handleToggle(id: number) {
-    dispatch(toggleTodo(id));
+    toggleTodo(id);
   }
 
   function handleDelete(id: number) {
-    dispatch(deleteTodo(id));
+    deleteTodo(id);
   }
 
   if (list.length === 0) {
